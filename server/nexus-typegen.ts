@@ -66,7 +66,7 @@ export interface NexusGenFieldTypes {
   }
   Post: { // field return type
     caption: string | null; // String
-    creator: NexusGenRootTypes['User'] | null; // User
+    creator: NexusGenRootTypes['User']; // User!
     creatorId: number | null; // Int
     id: number | null; // Int
     image: string | null; // String

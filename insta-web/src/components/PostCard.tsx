@@ -2,10 +2,10 @@ import React from "react";
 import { FaRegHeart } from "react-icons/fa";
 
 interface PostCardProps {
-  username: string;
-  imageSrc: string;
-  likes: number;
-  caption: string;
+  username: string | null | undefined;
+  imageSrc: string | null | undefined;
+  likes: number | null | undefined;
+  caption: string | null | undefined;
 }
 
 const PostCard: React.FC<PostCardProps> = ({

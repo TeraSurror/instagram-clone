@@ -10,10 +10,10 @@ export const Post = objectType({
     t.string("image");
     t.int("likes");
     t.int("creatorId");
-    t.field("creator", {
+    t.nonNull.field("creator", {
       type: User,
-      resolve(_root, _args, { req, prisma }: MyContext) {
-        return prisma.user.findUnique({ where: { id: req.session.userId } });
+      resolve(_root, _args, { prisma }: MyContext) {
+        return prisma.user.findUnique({ where: { id: _root.creatorId } });
       },
     });
   },

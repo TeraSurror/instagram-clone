@@ -10,10 +10,10 @@ export const User = objectType({
     t.string("email");
     t.list.field("posts", {
       type: Post,
-      resolve(_root, _args, { req, prisma }: MyContext) {
+      resolve(_root, _args, { prisma }: MyContext) {
         return prisma.post.findMany({
           where: {
-            creatorId: req.session.userId,
+            creatorId: _root.id,
           },
         });
       },

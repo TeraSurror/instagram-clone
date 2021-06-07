@@ -2,6 +2,7 @@ import { PrismaClient } from ".prisma/client";
 import { ApolloServer } from "apollo-server-express";
 import connectRedis from "connect-redis";
 import express from "express";
+import cors from "cors";
 import session from "express-session";
 import { schema } from "./schema";
 import { MyContext } from "./types/MyContext";
@@ -13,6 +14,13 @@ const main = async () => {
   const app = express();
 
   // await prisma.post.deleteMany();
+
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      credentials: true,
+    })
+  );
 
   const RedisStore = connectRedis(session);
   const redis = new Redis();

@@ -14,7 +14,7 @@ type Mutation {
 
 type Post {
   caption: String
-  creator: User
+  creator: User!
   creatorId: Int
   id: Int
   image: String
