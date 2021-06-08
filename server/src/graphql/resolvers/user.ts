@@ -69,7 +69,6 @@ export const LoginMutation = extendType({
             ? { email: usernameOrEmail }
             : { username: usernameOrEmail },
         });
-
         req.session.userId = user?.id;
 
         return user;

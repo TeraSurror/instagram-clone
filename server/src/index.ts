@@ -15,15 +15,15 @@ const main = async () => {
 
   // await prisma.post.deleteMany();
 
+  const RedisStore = connectRedis(session);
+  const redis = new Redis();
+
   app.use(
     cors({
       origin: "http://localhost:3000",
       credentials: true,
     })
   );
-
-  const RedisStore = connectRedis(session);
-  const redis = new Redis();
 
   app.use(
     session({

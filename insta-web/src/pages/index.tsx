@@ -35,17 +35,30 @@ export default function Home() {
 
   return (
     <Layout>
-      {data?.posts.map((post) => {
-        return !post ? null : (
-          <PostCard
-            key={post?.id}
-            username={post.creator.username}
-            caption={post.caption}
-            imageSrc={post.image}
-            likes={post.likes}
-          />
-        );
-      })}
+      <div
+        style={{
+          marginTop: 16,
+          marginLeft: "auto",
+          marginRight: "auto",
+          maxWidth: "700px",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        {data?.posts.map((post) => {
+          return !post ? null : (
+            <PostCard
+              key={post?.id}
+              username={post.creator.username}
+              caption={post.caption}
+              imageSrc={post.image}
+              likes={post.likes}
+            />
+          );
+        })}
+      </div>
     </Layout>
   );
 }

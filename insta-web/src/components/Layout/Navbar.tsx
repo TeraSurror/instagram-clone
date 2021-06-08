@@ -1,28 +1,74 @@
 import React from "react";
 import NextLink from "next/link";
+import { useMeQuery, useLogoutMutation } from "../../generated/graphql";
+import { useRouter } from "next/dist/client/router";
 
 interface NavbarProps {}
 
 interface NavLinkProps {
-    route: string,
-    content: string,
+  route: string;
+  content: string;
 }
 
-const NavItem: React.FC<NavLinkProps> = ({route, content}) => {
-    return (
-        <NextLink href={route}>
-            <div style = {{
-                cursor: "pointer",
-                marginRight: 16,
-            }}>
-                {content}
-            </div>
-        </NextLink>
-    );
-
-}
+const NavItem: React.FC<NavLinkProps> = ({ route, content }) => {
+  return (
+    <NextLink href={route}>
+      <div
+        style={{
+          cursor: "pointer",
+          marginRight: 16,
+        }}
+      >
+        {content}
+      </div>
+    </NextLink>
+  );
+};
 
 const Navbar: React.FC<NavbarProps> = () => {
+  const router = useRouter();
+  const [logout] = useLogoutMutation();
+
+  const { data, loading, error } = useMeQuery();
+
+  let body;
+
+  if (loading) {
+    body = null;
+  } else if (!data?.me) {
+    body = (
+      <>
+        <NavItem content="Register" route="/register" />
+        <NavItem content="Login" route="/login" />
+      </>
+    );
+  } else {
+    body = (
+      <>
+        <div
+          style={{
+            cursor: "pointer",
+            marginRight: 16,
+          }}
+        >
+          {data?.me?.username}
+        </div>
+        <div
+          onClick={async () => {
+            await logout();
+            router.reload();
+          }}
+          style={{
+            cursor: "pointer",
+            marginRight: 16,
+          }}
+        >
+          Logout
+        </div>
+      </>
+    );
+  }
+
   return (
     <div
       style={{
@@ -35,18 +81,19 @@ const Navbar: React.FC<NavbarProps> = () => {
       }}
     >
       <div>
-          <NavItem content="Instagram" route="/"/>
+        <NavItem content="Instagram" route="/" />
       </div>
 
-      <div style={{
+      <div
+        style={{
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",
-      }}>
-        <NavItem content="Home" route="/"/>
-        <NavItem content="Profile" route="/profile"/>
-        <NavItem content="Logout" route="/logout"/>
+        }}
+      >
+        <NavItem content="Home" route="/" />
+        {body}
       </div>
     </div>
   );
