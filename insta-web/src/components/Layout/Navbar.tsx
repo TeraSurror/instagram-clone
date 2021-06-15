@@ -38,6 +38,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   } else if (!data?.me) {
     body = (
       <>
+        <NavItem content="Home" route="/" />
         <NavItem content="Register" route="/register" />
         <NavItem content="Login" route="/login" />
       </>
@@ -45,6 +46,17 @@ const Navbar: React.FC<NavbarProps> = () => {
   } else {
     body = (
       <>
+        <div>
+          <button
+            style={{ height: "2.5em", padding: "0 1em", marginRight: 16 }}
+            onClick={() => {
+              router.push("/create-post");
+            }}
+          >
+            Create Post
+          </button>
+        </div>
+        <NavItem content="Home" route="/" />
         <div
           style={{
             cursor: "pointer",
@@ -92,7 +104,6 @@ const Navbar: React.FC<NavbarProps> = () => {
           alignItems: "center",
         }}
       >
-        <NavItem content="Home" route="/" />
         {body}
       </div>
     </div>

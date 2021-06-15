@@ -1,0 +1,9 @@
+mutation CreatePost ($image: String!, $caption:String!) {
+  createPost(image:$image, caption:$caption) {
+    id
+    caption
+    image
+    likes
+    creatorId    
+  }
+}

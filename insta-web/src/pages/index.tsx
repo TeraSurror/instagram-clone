@@ -1,9 +1,10 @@
 import Layout from "../components/Layout";
 import PostCard from "../components/PostCard";
-import { usePostsQuery } from "../generated/graphql";
+import { useMeQuery, usePostsQuery } from "../generated/graphql";
 
 export default function Home() {
   const { data, loading, error } = usePostsQuery();
+  const { data: meData } = useMeQuery();
 
   if (loading) {
     return (
@@ -55,6 +56,7 @@ export default function Home() {
               caption={post.caption}
               imageSrc={post.image}
               likes={post.likes}
+              me={meData?.me?.username === post.creator.username}
             />
           );
         })}

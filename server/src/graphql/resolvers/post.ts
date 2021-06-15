@@ -33,7 +33,7 @@ export const PostQuery = extendType({
     t.nonNull.list.field("posts", {
       type: Post,
       resolve(_root, _args, ctx: MyContext) {
-        return ctx.prisma.post.findMany();
+        return ctx.prisma.post.findMany({ orderBy: { createdAt: "desc" } });
       },
     });
   },

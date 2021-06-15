@@ -1,11 +1,13 @@
+import { useRouter } from "next/dist/client/router";
 import React from "react";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaEdit } from "react-icons/fa";
 
 interface PostCardProps {
   username: string | null | undefined;
   imageSrc: string | null | undefined;
   likes: number | null | undefined;
   caption: string | null | undefined;
+  me: boolean;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -13,7 +15,11 @@ const PostCard: React.FC<PostCardProps> = ({
   imageSrc,
   likes,
   caption,
+  me,
 }) => {
+
+  const router = useRouter();
+
   return (
     <div
       style={{
@@ -31,7 +37,7 @@ const PostCard: React.FC<PostCardProps> = ({
           fontWeight: "bold",
         }}
       >
-        {username}
+        <div>{username}</div>
       </div>
 
       <div
