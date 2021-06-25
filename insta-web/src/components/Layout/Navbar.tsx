@@ -93,7 +93,10 @@ const Navbar: React.FC<NavbarProps> = () => {
       }}
     >
       <div>
-        <NavItem content="Instagram" route="/" />
+        <img
+          alt="icon"
+          src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+        />
       </div>
 
       <div

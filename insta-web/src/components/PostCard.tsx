@@ -1,6 +1,6 @@
 import { useRouter } from "next/dist/client/router";
-import React from "react";
-import { FaRegHeart, FaEdit } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 interface PostCardProps {
   username: string | null | undefined;
@@ -17,6 +17,7 @@ const PostCard: React.FC<PostCardProps> = ({
   caption,
   me,
 }) => {
+  const [isLiked, setIsLiked] = useState(false);
 
   const router = useRouter();
 
@@ -48,7 +49,7 @@ const PostCard: React.FC<PostCardProps> = ({
           boxShadow: "0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
         }}
       >
-        <img src={imageSrc} width="100%" height="auto" />
+        <img src={`${imageSrc}`} width="100%" height="auto" />
       </div>
 
       <div
@@ -57,8 +58,20 @@ const PostCard: React.FC<PostCardProps> = ({
           paddingLeft: "1em",
         }}
       >
-        <FaRegHeart size="24px" />
-        {/* <FaHeart size="24px" color="red"/> */}
+        {isLiked ? (
+          <FaHeart
+            style={{ cursor: "pointer" }}
+            onClick={() => setIsLiked(!isLiked)}
+            size="24px"
+            color="red"
+          />
+        ) : (
+          <FaRegHeart
+            style={{ cursor: "pointer" }}
+            onClick={() => setIsLiked(!isLiked)}
+            size="24px"
+          />
+        )}
       </div>
 
       <div
